@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center" style="height: 100vh;">
+
+  <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
+    <h3 class="text-center mb-4">Login</h3>
+    <form id="loginForm">
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
+    <div id="errorMessage" class="text-danger text-center mt-3" style="display: none;">
+      Invalid email or password.
+    </div>
+    <div className="text-center text-sm text-muted-foreground mt-2">
+        <p>Allowed Users (for testing):</p>
+        <!-- <p>Email: rohan | Password: test@123</p> -->
+        <p>Email: punith@gmail.com | Password: test@1234</p>
+      </div>
+  </div>
+
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script>
+  
+    const ALLOWED_USERS = [
+            { email: "rohan@gmail.com", password: "test@123" },
+            { email: "punith@gmail.com", password: "test@1234" }
+        ];
+
+    const form = document.getElementById("loginForm");
+    const errorMessage = document.getElementById("errorMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+    const user = ALLOWED_USERS.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (user) {
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", email); // Optional: store user info
+      window.location.href = "index.html";
+    } else {
+        errorMessage.style.display = "block";
+        setTimeout(() => {
+            errorMessage.style.display = "none";
+        }, 2000);
+    }
+    });
+  </script>
+</body>
+</html>

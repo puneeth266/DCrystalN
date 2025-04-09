@@ -206,5 +206,9 @@
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    // Redirect to login page if not logged in
+    window.location.href = "login.html";
+  }
 
 })();

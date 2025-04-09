@@ -82,6 +82,10 @@
       document.getElementById('modalImage').src = imageUrl;
       document.getElementById('imageModal').style.display = 'block';
     }
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+    // Redirect to login page if not logged in
+    window.location.href = "login.html";
+  }
     </script>
 
 <!-- Modal for PDFs -->
@@ -95,6 +99,14 @@ function showPDFModal(pdfUrl) {
   document.getElementById('pdfViewer').src = pdfUrl;
   document.getElementById('pdfModal').style.display = 'block';
 }
+if (localStorage.getItem("isLoggedIn") !== "true") {
+    // Redirect to login page if not logged in
+    window.location.href = "login.html";
+  }
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
 </script>
 
           <li class="dropdown"><a href="#"><span>Solutions</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -150,6 +162,7 @@ function showPDFModal(pdfUrl) {
 
       <a class="btn-getstarted flex-md-shrink-0" href="#Pricing">Book a Demo</a>
 
+      <button onclick="logout()" class="btn btn-danger flex-md-shrink-0" style="margin-left: 7px;">Logout</button>
     </div>
   </header>
 
